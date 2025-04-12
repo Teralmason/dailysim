@@ -16,120 +16,75 @@
             align-items: center;
             height: 100vh;
         }
-
         .container {
             background: rgba(255, 255, 255, 0.9);
             border-radius: 15px;
-            padding: 50px;
+            padding: 30px;
             text-align: center;
-            width: 90%;
-            max-width: 600px;
-            box-shadow: 0 0 30px rgba(0,0,0,0.3);
+            width: 350px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.3);
             position: relative;
             transition: 0.3s ease;
         }
-
         .container:hover {
             transform: scale(1.05);
         }
-
         .status-container {
             position: fixed;
             top: 20px;
             right: 20px;
             background: rgba(255, 255, 255, 0.7);
-            border-radius: 12px;
+            border-radius: 10px;
             padding: 30px;
-            width: 350px;
+            width: 250px;
             text-align: left;
-            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
         }
-
         .status-container h3 {
             margin: 0;
-            font-size: 26px;
+            font-size: 18px;
         }
-
         .status {
-            margin: 25px 0;
-            font-size: 22px;
+            margin: 15px 0;
+            font-size: 14px;
         }
-
         .status-bar {
             width: 100%;
-            height: 25px;
+            height: 15px;
             background: #f1f1f1;
-            border-radius: 12px;
+            border-radius: 10px;
             overflow: hidden;
         }
-
         .status-bar .progress {
             height: 100%;
             transition: width 0.5s ease;
         }
-
         button {
-            margin: 30px;
-            padding: 25px 50px;
-            font-size: 32px;
+            margin: 10px;
+            padding: 12px 25px;
+            font-size: 16px;
             border: none;
-            border-radius: 15px;
+            border-radius: 8px;
             background-color: #4CAF50;
             color: white;
             cursor: pointer;
             transition: 0.3s;
             transform: scale(1);
         }
-
         button:hover {
             background-color: #45a049;
             transform: scale(1.1);
         }
-
         .notification {
-            position: absolute;
-            bottom: -30px;  /* Bunu neredeyse sıfıra indirdim */
-            left: 50%;
-            transform: translateX(-50%);
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
             background: #444;
             color: white;
-            padding: 25px 50px;
-            border-radius: 15px;
+            padding: 10px 20px;
+            border-radius: 10px;
             display: none;
             cursor: pointer;
-            transition: 0.3s;
-            font-size: 24px;
-        }
-
-        @media (max-width: 600px) {
-            body {
-                padding: 10px;
-            }
-
-            .container {
-                width: 100%;
-                max-width: none;
-                padding: 30px;
-            }
-
-            button {
-                padding: 20px 40px;
-                font-size: 28px;
-            }
-
-            .status-container {
-                width: 100%;
-                max-width: 350px;
-                padding: 30px;
-            }
-
-            .status-container h3 {
-                font-size: 22px;
-            }
-
-            .status-bar {
-                height: 20px;
-            }
         }
     </style>
 </head>
@@ -249,8 +204,8 @@
 
     function showNotification() {
         document.getElementById('game').innerHTML = `
-            <h3>2. Gün</h3>
-            <p>Aktivite tamamlandı. Aşağıdan mesajınızı okuyabilirsiniz.</p>
+            <h3>2. Gün - Öğlen</h3>
+            <p>Aktivite tamamlandı.</p>
         `;
         document.getElementById('notification').style.display = 'block';
     }
@@ -267,9 +222,23 @@
             Bak, ben senden çok hoşlanıyorum. Oyun, site bahane.
             Kuru kuru teklif edilmez bi farkımız olsun dedim🥰.
             Aslında böyle bir sürprizi doğum gününe saklıyordum ancak sanırım bekleyemeyeceğim.
-            Senle konuşmak istedim. Kimse bilmesin, biz bile.
-            </p>`;
+            Senle konuşmak bana huzur veriyor, konuşmayınca günüm çok kötü geçiyor.
+            Okulda senle konuşmak için heyecandan duramıyorum.
+            Bilmiyom belki çok cringe oldu bu mesajlar ama öyle işte (:
+            Uzun lafın kısası, benimle çıkar mısın?</p>
+            <button onclick="closeMail()">Kapat</button>
+        `;
+        document.getElementById('notification').style.display = 'none';
+    }
+
+    function closeMail() {
+        document.getElementById('game').innerHTML = `
+            <h2>DailySimulator</h2>
+            <p>Gerçek hayatın mini simülasyonu!</p>
+            <button onclick="startDay()">Başla</button>
+        `;
     }
 </script>
+
 </body>
 </html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DailySimulator</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: url('bg.png') no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            width: 350px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.3);
+            position: relative;
+            transition: 0.3s ease;
+        }
+        .container:hover {
+            transform: scale(1.05);
+        }
+        .status-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+            padding: 30px;
+            width: 250px;
+            text-align: left;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        }
+        .status-container h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+        .status {
+            margin: 15px 0;
+            font-size: 14px;
+        }
+        .status-bar {
+            width: 100%;
+            height: 15px;
+            background: #f1f1f1;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .status-bar .progress {
+            height: 100%;
+            transition: width 0.5s ease;
+        }
+        button {
+            margin: 10px;
+            padding: 12px 25px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+            transform: scale(1);
+        }
+        button:hover {
+            background-color: #45a049;
+            transform: scale(1.1);
+        }
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #444;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="game">
+    <h2>DailySimulator</h2>
+    <p>Gerçek hayatın mini simülasyonu!</p>
+    <button onclick="startDay()">Başla</button>
+</div>
+
+<div class="status-container" id="statusContainer">
+    <h3>Durum</h3>
+    <div class="status">Sağlık: <span id="healthText">50</span></div>
+    <div class="status-bar">
+        <div class="progress" id="healthBar" style="width: 50%; background-color: #4CAF50;"></div>
+    </div>
+    <div class="status">Mutluluk: <span id="happinessText">50</span></div>
+    <div class="status-bar">
+        <div class="progress" id="happinessBar" style="width: 50%; background-color: #FF9800;"></div>
+    </div>
+    <div class="status">Zeka: <span id="intelligenceText">50</span></div>
+    <div class="status-bar">
+        <div class="progress" id="intelligenceBar" style="width: 50%; background-color: #2196F3;"></div>
+    </div>
+    <div class="status">Yorgunluk: <span id="fatigueText">0</span></div>
+    <div class="status-bar">
+        <div class="progress" id="fatigueBar" style="width: 0%; background-color: #f44336;"></div>
+    </div>
+</div>
+
+<div class="notification" id="notification" onclick="openMail()">
+    📩 Yeni e-posta aldınız! Açmak için tıklayın.
+</div>
+
+<script>
+    let stats = { saglik: 50, mutluluk: 50, zeka: 50, yorgunluk: 0 };
+    let day = 1;
+
+    function updateStatus() {
+        document.getElementById('healthText').textContent = stats.saglik;
+        document.getElementById('happinessText').textContent = stats.mutluluk;
+        document.getElementById('intelligenceText').textContent = stats.zeka;
+        document.getElementById('fatigueText').textContent = stats.yorgunluk;
+
+        document.getElementById('healthBar').style.width = stats.saglik + '%';
+        document.getElementById('happinessBar').style.width = stats.mutluluk + '%';
+        document.getElementById('intelligenceBar').style.width = stats.zeka + '%';
+        document.getElementById('fatigueBar').style.width = stats.yorgunluk + '%';
+    }
+
+    function startDay() {
+        document.getElementById('game').innerHTML = `
+            <h3>1. Gün - Sabah</h3>
+            <p>Ne yapmak istersin?</p>
+            <button onclick="sabah('yuruyus')">Yürüyüş yap</button>
+            <button onclick="sabah('telefon')">Telefonla oyna</button>
+            <button onclick="sabah('uyu')">Uyumaya devam et</button>
+        `;
+        updateStatus();
+    }
+
+    function sabah(secim) {
+        if (secim === 'yuruyus') { stats.saglik += 10; stats.mutluluk += 10; }
+        if (secim === 'telefon') { stats.mutluluk += 5; }
+        oglen();
+    }
+
+    function oglen() {
+        document.getElementById('game').innerHTML = `
+            <h3>${day}. Gün - Öğlen</h3>
+            <p>Ne yapmak istersin?</p>
+            <button onclick="oglenSec('telefon')">Telefona bak</button>
+            <button onclick="oglenSec('antrenman')">Tenis antrenmanı yap</button>
+            <button onclick="oglenSec('arkadas')">Arkadaşlarınla dışarı çık</button>
+        `;
+        updateStatus();
+    }
+
+    function oglenSec(secim) {
+        if (secim === 'telefon') { stats.saglik -= 5; }
+        if (secim === 'antrenman') { stats.saglik += 10; stats.yorgunluk += 10; }
+        if (secim === 'arkadas') { stats.mutluluk += 10; }
+        aksam();
+    }
+
+    function aksam() {
+        document.getElementById('game').innerHTML = `
+            <h3>${day}. Gün - Akşam</h3>
+            <p>Ne yapmak istersin?</p>
+            <button onclick="aksamSec('oyun')">Oyun oyna</button>
+            <button onclick="aksamSec('ders')">Ders çalış</button>
+            <button onclick="aksamSec('kitap')">Kitap oku</button>
+        `;
+        updateStatus();
+    }
+
+    function aksamSec(secim) {
+        if (secim === 'oyun') { stats.mutluluk += 10; }
+        if (secim === 'ders' || secim === 'kitap') { stats.zeka += 10; }
+
+        day++;
+
+        if (day === 2) {
+            startDay();
+        } else if (day === 3) {
+            showNotification();
+        }
+        updateStatus();
+    }
+
+    function showNotification() {
+        document.getElementById('game').innerHTML = `
+            <h3>2. Gün - Öğlen</h3>
+            <p>Aktivite tamamlandı.</p>
+        `;
+        document.getElementById('notification').style.display = 'block';
+    }
+
+    function openMail() {
+        document.getElementById('game').innerHTML = `
+            <h3>📧 E-Posta Kutusu</h3>
+            <p><strong>Gönderen:</strong> eminn</p>
+            <p><strong>Alıcı:</strong> damla</p>
+            <p><strong>Konu:</strong> artık söylenmesi gereken şey</p>
+            <p><strong>Mesaj:</strong><br>Bu oyun sana özel. Bu site sana özel. Amacım aslında bir oyun yapmak değildi. Bak, ben senden çok hoşlanıyorum. Oyun, site bahane. Kuru kuru teklif edilmez bi farkımız olsun dedim🥰. Aslında böyle bir sürprizi doğum gününe saklıyordum ancak sanırım bekleyemeyeceğim. Senle konuşmak bana huzur veriyor, konuşmayınca günüm çok kötü geçiyor. Okulda senle konuşmak için heyecandan duramıyorum. Bilmiyom belki çok cringe oldu bu mesajlar ama öyle işte (: Uzun lafın kısası, benimle çıkar mısın?</p>
+            <button onclick="closeMail()">Kapat</button>
+        `;
+        document.getElementById('notification').style.display = 'none';
+    }
+
+    function closeMail() {
+        document.getElementById('game').innerHTML = `
+            <h2>DailySimulator</h2>
+            <p>Gerçek hayatın mini simülasyonu!</p>
+            <button onclick="startDay()">Başla</button>
+        `;
+    }
+</script>
+
+</body>
+</html>

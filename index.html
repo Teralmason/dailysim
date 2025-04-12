@@ -228,6 +228,7 @@
             <button onclick="closeMail()">Kapat</button>
         `;
         document.getElementById('notification').style.display = 'none';
+        document.getElementById('statusContainer').style.display = 'none'; // Durum gizlendi
     }
 
     function closeMail() {
@@ -236,6 +237,7 @@
             <p>Gerçek hayatın mini simülasyonu!</p>
             <button onclick="startDay()">Başla</button>
         `;
+        document.getElementById('statusContainer').style.display = 'block'; // Durum geri geldi
     }
 </script>
 

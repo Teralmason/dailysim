@@ -16,52 +16,61 @@
             align-items: center;
             height: 100vh;
         }
+
         .container {
             background: rgba(255, 255, 255, 0.9);
             border-radius: 15px;
-            padding: 30px;
+            padding: 20px;
             text-align: center;
-            width: 350px;
+            width: 90%;
+            max-width: 350px;
             box-shadow: 0 0 15px rgba(0,0,0,0.3);
             position: relative;
             transition: 0.3s ease;
         }
+
         .container:hover {
             transform: scale(1.05);
         }
+
         .status-container {
             position: fixed;
             top: 20px;
             right: 20px;
             background: rgba(255, 255, 255, 0.7);
             border-radius: 10px;
-            padding: 30px;
+            padding: 20px;
             width: 250px;
             text-align: left;
             box-shadow: 0 0 15px rgba(0,0,0,0.2);
         }
+
         .status-container h3 {
             margin: 0;
-            font-size: 18px;
+            font-size: 16px;
         }
+
         .status {
-            margin: 15px 0;
+            margin: 10px 0;
             font-size: 14px;
         }
+
         .status-bar {
             width: 100%;
-            height: 15px;
+            height: 10px;
             background: #f1f1f1;
             border-radius: 10px;
             overflow: hidden;
         }
+
         .status-bar .progress {
             height: 100%;
             transition: width 0.5s ease;
         }
+
         button {
             margin: 10px;
-            padding: 12px 25px;
+            padding: 12px 20px;
             font-size: 16px;
             border: none;
             border-radius: 8px;
@@ -71,10 +80,12 @@
             transition: 0.3s;
             transform: scale(1);
         }
+
         button:hover {
             background-color: #45a049;
             transform: scale(1.1);
         }
+
         .notification {
             position: fixed;
             bottom: 20px;
@@ -86,9 +97,46 @@
             display: none;
             cursor: pointer;
         }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                width: 100%;
+                max-width: none;
+                padding: 15px;
+            }
+
+            button {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+
+            .status-container {
+                width: 100%;
+                max-width: 300px;
+                padding: 15px;
+            }
+
+            .status-container h3 {
+                font-size: 14px;
+            }
+
+            .status-bar {
+                height: 8px;
+            }
+        }
     </style>
 </head>
 <body>
+
+<!-- Müzik dosyasını ekliyoruz -->
+<audio id="backgroundMusic" autoplay loop>
+    <source src="music.mp3" type="audio/mp3">
+    Tarayıcınız audio etiketini desteklemiyor.
+</audio>
 
 <div class="container" id="game">
     <h2>DailySimulator</h2>
@@ -210,7 +258,16 @@
             <p><strong>Gönderen:</strong> eminn</p>
             <p><strong>Alıcı:</strong> damla</p>
             <p><strong>Konu:</strong> artık söylenmesi gereken şey</p>
-            <p><strong>Mesaj:</strong><br>Bu oyun sana özel. Bu site sana özel. Amacım aslında bir oyun yapmak değildi. Bak, ben senden çok hoşlanıyorum. Oyun, site bahane. Kuru kuru teklif edilmez bi farkımız olsun dedim🥰. Aslında böyle bir sürprizi doğum gününe saklıyordum ancak sanırım bekleyemeyeceğim. Senle konuşmak bana huzur veriyor, konuşmayınca günüm çok kötü geçiyor. Okulda senle konuşmak için heyecandan duramıyorum. Bilmiyom belki çok cringe oldu bu mesajlar ama öyle işte (: Uzun lafın kısası, benimle çıkar mısın?</p>
+            <p><strong>Mesaj:</strong><br>Bu oyun sana özel.
+            Bu site sana özel.
+            Amacım aslında bir oyun yapmak değildi.
+            Bak, ben senden çok hoşlanıyorum. Oyun, site bahane.
+            Kuru kuru teklif edilmez bi farkımız olsun dedim🥰.
+            Aslında böyle bir sürprizi doğum gününe saklıyordum ancak sanırım bekleyemeyeceğim.
+            Senle konuşmak bana huzur veriyor, konuşmayınca günüm çok kötü geçiyor.
+            Okulda senle konuşmak için heyecandan duramıyorum.
+            Bilmiyom belki çok cringe oldu bu mesajlar ama öyle işte (:
+            Uzun lafın kısası, benimle çıkar mısın?</p>
             <button onclick="closeMail()">Kapat</button>
         `;
         document.getElementById('notification').style.display = 'none';

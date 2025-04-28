@@ -216,19 +216,20 @@
             <p><strong>Alıcı:</strong> damla</p>
             <p><strong>Konu:</strong> artık söylenmesi gereken şey</p>
             <p><strong>Mesaj:</strong><br>Bu oyun sana özel.
-            Bu site sana özel.
-            Amacım aslında bir oyun yapmak değildi.
-            Bak, ben senden çok hoşlanıyorum. Oyun, site bahane.
-            Kuru kuru teklif edilmez bi farkımız olsun dedim🥰.
-            bilmiyom belki cok crine oldu mesajlar ama oyle iste.
-            yazarken cok utaniyom ama benimle cikar misinnn??????
-        
+           Bu site sana özel. Amacım aslında bir oyun yapmak değildi. Bak, ben senden çok hoşlanıyorum. Oyun, site bahane. Kuru kuru teklif edilmez bi farkımız olsun dedim🥰. bilmiyom belki cok crine oldu mesajlar ama oyle iste. yazarken cok utaniyom ama benimle cikar misinnn??????</p>
+            <button onclick="closeMail()">Kapat</button>
         `;
         document.getElementById('notification').style.display = 'none';
         document.getElementById('statusContainer').style.display = 'none'; // Durum gizlendi
     }
 
-    
+    function closeMail() {
+        document.getElementById('game').innerHTML = `
+            <h2>DailySimulator</h2>
+            <p>Gerçek hayatın mini simülasyonu!</p>
+            <button onclick="startDay()">Başla</button>
+        `;
+        document.getElementById('statusContainer').style.display = 'block'; // Durum geri geldi
     }
 </script>
 
